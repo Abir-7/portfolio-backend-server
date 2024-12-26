@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.blogRouter = void 0;
+const express_1 = require("express");
+const auth_1 = require("../../middleware/auth");
+const blog_controller_1 = require("./blog.controller");
+const router = (0, express_1.Router)();
+router.post("/add", (0, auth_1.auth)("admin"), blog_controller_1.blogController.addBlog);
+router.get("/", blog_controller_1.blogController.getAllBlog);
+router.get("/:id", blog_controller_1.blogController.getSingleBlog);
+router.patch("/:id", (0, auth_1.auth)("admin"), blog_controller_1.blogController.updateBlog);
+router.delete("/:id", (0, auth_1.auth)("admin"), blog_controller_1.blogController.deleteBlog);
+exports.blogRouter = router;
